@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Keypad : Interactable
+public class HpBox : Interactable
 {
+    [SerializeField] GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,6 @@ public class Keypad : Interactable
     }
     protected override void Interact()
     {
-        Debug.Log("Interacted with " + gameObject.name);
+        player.GetComponent<PlayerMotor>().hp += 5;
     }
 }

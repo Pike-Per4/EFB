@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -10,9 +11,15 @@ public class Gun : MonoBehaviour
     public int maxAmmo = 1000;
     public int currentAmmo;
 
+
+    [SerializeField] GameObject ammoText;
+
+
     private void Start()
     {
-        currentAmmo = 100;
+        currentAmmo = PlayerPrefs.GetInt("gunAmmo") == 0 ? 100 : PlayerPrefs.GetInt("gunAmmo");
+        var ammo = ammoText.GetComponent<TextMeshProUGUI>();
+        ammo.text = currentAmmo.ToString();
     }
 
 
@@ -36,6 +43,9 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + 1f/fireRate;
             Shoot();
         }
+        var ammo = ammoText.GetComponent<TextMeshProUGUI>();
+        ammo.text = currentAmmo.ToString();
+
     }
 
     void Shoot()
