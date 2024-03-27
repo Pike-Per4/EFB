@@ -18,4 +18,12 @@ public class EnemyFollow : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerMotor>().hp--;
+        }
+    }
 }

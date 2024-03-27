@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
@@ -11,16 +12,24 @@ public class PlayerMotor : MonoBehaviour
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpingHeight = 3f;
+    public int hp;
+    [SerializeField] GameObject hpText;
+    private TextMeshProUGUI hpt;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        hp = PlayerPrefs.GetInt("hp") == 0 ? 100 : PlayerPrefs.GetInt("hp");
+        hpt = hpText.GetComponent<TextMeshProUGUI>();
+        hpt.text = hp.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         isGrounded = controller.isGrounded;
+        hpt.text = hp.ToString();
     }
     public void ProcessMove(Vector2 input) 
     {
